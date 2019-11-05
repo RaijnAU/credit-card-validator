@@ -1,11 +1,12 @@
 const validateEl = document.getElementById("validate");
+const resultEl = document.getElementById("result");
 
 validateEl.addEventListener("click", () => {
 	const inputVal = document.getElementById("input").value;
 	if (validate(inputVal)) {
-		alert("This is a valid credit card number");
+		resultEl.innerHTML = "Valid Credit Card Number";
 	} else {
-		alert("Not a valid credit card");
+		resultEl.innerHTML = "Card Number Not Valid";
 	}
 });
 
