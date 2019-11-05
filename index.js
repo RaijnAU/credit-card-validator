@@ -1,12 +1,18 @@
 const validateEl = document.getElementById("validate");
 const resultEl = document.getElementById("result");
+const inputVal = document.getElementById("input");
 
 validateEl.addEventListener("click", () => {
-	const inputVal = document.getElementById("input").value;
-	if (validate(inputVal)) {
+	if (validate(inputVal.value)) {
 		resultEl.innerHTML = "Valid Credit Card Number";
 	} else {
 		resultEl.innerHTML = "Card Number Not Valid";
+	}
+});
+
+inputVal.addEventListener("keyup", event => {
+	if (event.keyCode === 13) {
+		validateEl.click();
 	}
 });
 
