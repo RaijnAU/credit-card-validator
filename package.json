@@ -1,0 +1,14 @@
+{
+	"name": "luhn",
+	"version": "1.0.0",
+	"description": "Luhn formula",
+	"main": "index.js",
+	"author": "Ryan Jones",
+	"license": "MIT",
+	"dependencies": {
+		"mocha": "^6.2.2"
+	},
+	"scripts": {
+		"test": "mocha"
+	}
+}
