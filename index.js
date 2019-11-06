@@ -12,6 +12,7 @@ const merchantEl = document.getElementById("merchant");
 const inputVal = document.getElementById("input");
 
 validateEl.addEventListener("click", () => {
+	merchantEl.empty();
 	const firstEight = inputVal.value.substring(0, 8);
 	//console.log(firstEight);
 	const fetchData = async () => {
