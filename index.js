@@ -1,10 +1,57 @@
+const lookup = require("binlookup")();
+
+//bank.name & country.name & scheme & type
+// AMEX =
+// Visa =
+// MCard =
+
+const validate = require("./validate");
 const validateEl = document.getElementById("validate");
 const resultEl = document.getElementById("result");
+const merchantEl = document.getElementById("merchant");
 const inputVal = document.getElementById("input");
 
 validateEl.addEventListener("click", () => {
+	const firstEight = inputVal.value.substring(0, 8);
+	//console.log(firstEight);
+	const fetchData = async () => {
+		const result = await lookup(firstEight);
+		const name = result.bank.name;
+		const country = result.country.name;
+		const { scheme, type } = result;
+		console.log(name, country, scheme, type);
+
+		const icon =
+			scheme === "amex"
+				? '<i class="fab fa-cc-amex fa-4x"></i> ' +
+				  "</br>" +
+				  name +
+				  ", " +
+				  country
+				: scheme === "visa"
+				? '<i class="fab fa-cc-visa fa-4x"></i> ' +
+				  "</br>" +
+				  name +
+				  ", " +
+				  country
+				: scheme === "mastercard"
+				? '<i class="fab fa-cc-mastercard fa-4x"></i> ' +
+				  "</br>" +
+				  name +
+				  ", " +
+				  country
+				: '<i class="fas fa-credit-card fa-4x"></i> ' +
+				  "</br>" +
+				  name +
+				  ", " +
+				  country;
+
+		merchantEl.innerHTML = icon;
+	};
+
 	if (validate(inputVal.value)) {
 		resultEl.innerHTML = "Valid Credit Card Number";
+		fetchData();
 	} else {
 		resultEl.innerHTML = "Card Number Not Valid";
 	}
@@ -15,38 +62,3 @@ inputVal.addEventListener("keyup", event => {
 		validateEl.click();
 	}
 });
-
-const to_digits = numString =>
-	numString
-		.replace(/[^0-9]/g, "")
-		.split("")
-		.map(Number);
-
-const condTransform = (predicate, value, fn) => {
-	if (predicate) {
-		return fn(value);
-	} else {
-		return value;
-	}
-};
-
-const doubleEveryOther = (current, idx) =>
-	condTransform(idx % 2 === 0, current, x => x * 2);
-
-const reduceMultiDigitVals = current =>
-	condTransform(current > 9, current, x => x - 9);
-
-const validate = numString => {
-	const digits = to_digits(numString);
-	const len = digits.length;
-	const luhn_digit = digits[len - 1];
-
-	const total = digits
-		.slice(0, len - 1)
-		.reverse()
-		.map(doubleEveryOther)
-		.map(reduceMultiDigitVals)
-		.reduce((acc, cur) => acc + cur, luhn_digit);
-
-	return total % 10 === 0;
-};

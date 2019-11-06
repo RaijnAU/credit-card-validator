@@ -37,6 +37,10 @@ input {
     -webkit-transition: height 1s;
 }
 
+i {
+    margin-top: 5px;
+}
+
 #result {
     margin-top: 20px;
     font-family: 'Muli', sans-serif;
@@ -48,6 +52,21 @@ input {
 }
 
 #result:empty {
+    display: none;
+}
+
+#merchant {
+    margin-top: 20px;
+    font-family: 'Muli', sans-serif;
+    text-align: center;
+    /* font-weight: 900; */
+    font-size: 22px;
+    background-color: #23235B;
+    padding: 20px;
+    box-shadow: 0px 2px 10px rgba(255, 255, 255, 0.2);
+}
+
+#merchant:empty {
     display: none;
 }
 

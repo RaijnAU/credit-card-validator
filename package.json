@@ -6,9 +6,16 @@
 	"author": "Ryan Jones",
 	"license": "MIT",
 	"dependencies": {
+		"binlookup": "^2.0.1",
 		"mocha": "^6.2.2"
 	},
 	"scripts": {
-		"test": "mocha"
+		"test": "mocha",
+		"build": "browserify index.js -o bundle.js",
+		"watch": "watchify index.js -o bundle.js"
+	},
+	"devDependencies": {
+		"browserify": "^16.5.0",
+		"watchify": "^3.11.1"
 	}
 }
