@@ -12,7 +12,7 @@ const merchantEl = document.getElementById("merchant");
 const inputVal = document.getElementById("input");
 
 validateEl.addEventListener("click", () => {
-	merchantEl.empty();
+	merchantEl.innerHTML = "";
 	const firstEight = inputVal.value.substring(0, 8);
 	//console.log(firstEight);
 	const fetchData = async () => {
@@ -20,7 +20,6 @@ validateEl.addEventListener("click", () => {
 		const name = result.bank.name;
 		const country = result.country.name;
 		const { scheme, type } = result;
-		console.log(name, country, scheme, type);
 
 		const icon =
 			scheme === "amex"
